@@ -24,10 +24,10 @@ export default function App() {
   /**
    * Creates a new call room.
    */
-  const createCall = useCallback(() => {
+  const createCall = useCallback((roomID) => {
     setAppState(STATE_CREATING);
     return api
-      .createRoom()
+      .createRoom(roomID)
       .then((room) => room.url)
       .catch((error) => {
         console.log('Error creating room', error);
@@ -205,8 +205,14 @@ export default function App() {
    */
   const enableStartButton = appState === STATE_IDLE;
 
+  const roomsID = [
+    'BH83rOEQmfGoV3hPdazN',
+    'WcQW4eHbRKJf9PsyAH1c',
+    'rrlXOpH1KlwNLO6GtBVp',
+  ];
   return (
     <div className="app">
+      <h1 className="title">MeetUs Rooms</h1>
       {showCall ? (
         // NOTE: for an app this size, it's not obvious that using a Context
         // is the best choice. But for larger apps with deeply-nested components
@@ -220,12 +226,18 @@ export default function App() {
           />
         </CallObjectContext.Provider>
       ) : (
-        <StartButton
-          disabled={!enableStartButton}
-          onClick={() => {
-            createCall().then((url) => startJoiningCall(url));
-          }}
-        />
+        <div className="button-container">
+          {roomsID.map((roomID, index) => (
+            <StartButton
+              key={index}
+              disabled={!enableStartButton}
+              onClick={() => {
+                createCall(roomID).then((url) => startJoiningCall(url));
+              }}
+              number={index + 1}
+            />
+          ))}
+        </div>
       )}
     </div>
   );

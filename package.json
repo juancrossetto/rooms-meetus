@@ -1,5 +1,5 @@
 {
-  "name": "react-demo",
+  "name": "meetus-room",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -13,7 +13,7 @@
     "serve": "^11.3.0"
   },
   "scripts": {
-    "dev": "PORT=3002 react-scripts start",
+    "dev": "react-scripts start -p 3002",
     "build": "react-scripts build",
     "netlify-build": "sed -i s/DAILY_API_KEY_PLACEHOLDER/${DAILY_API_KEY}/g netlify.toml && npm run build",
     "start": "PORT=3002 serve build",

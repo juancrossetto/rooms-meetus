@@ -1,5 +1,4 @@
-const newRoomEndpoint =
-  `${window.location.origin}/api/rooms`;
+const newRoomEndpoint = `${window.location.origin}/api/rooms`;
 
 /**
  * Create a short-lived room for demo purposes.
@@ -9,26 +8,27 @@ const newRoomEndpoint =
  * in README.md
  *
  * See https://docs.daily.co/reference#create-room for more information on how
- * to use the Daily REST API to create rooms and what options are available. 
+ * to use the Daily REST API to create rooms and what options are available.
  */
-async function createRoom() {
-
-  const exp = Math.round(Date.now() / 1000) + 60 * 30;
-  const options = {
-    properties: {
-      exp: exp,
-    },
-  };
-  let response = await fetch(newRoomEndpoint, {
-    method: "POST",
-    body: JSON.stringify(options),
-    mode: 'cors',
-  }),
-    room = await response.json();
-  return room;
+async function createRoom(roomID) {
+  // const exp = Math.round(Date.now() / 1000) + 60 * 30;
+  // const options = {
+  //   properties: {
+  //     exp: exp,
+  //   },
+  // };
+  // console.log('newRoomEndpoint', newRoomEndpoint);
+  // let response = await fetch(newRoomEndpoint, {
+  //     method: 'POST',
+  //     body: JSON.stringify(options),
+  //     mode: 'cors',
+  //   }),
+  //   room = await response.json();
+  // console.log('room', room);
+  // return room;
 
   // Comment out the above and uncomment the below, using your own URL
-  // return { url: "https://your-domain.daily.co/hello" };
+  return { url: `https://meetus-semi2.daily.co/${roomID}` };
 }
 
 export default { createRoom };

@@ -6,14 +6,10 @@ import './StartButton.css';
  * - disabled: boolean
  * - onClick: () => ()
  */
-export default function StartButton(props) {
+export default function StartButton({ disabled, onClick, number }) {
   return (
-    <button
-      className="start-button"
-      disabled={props.disabled}
-      onClick={props.onClick}
-    >
-      Click to start a call
+    <button className="start-button" disabled={disabled} onClick={onClick}>
+      Ingresar Sala {number}
     </button>
   );
 }

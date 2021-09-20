@@ -4,3 +4,19 @@
   height: 100%;
   width: 100%;
 }
+
+.button-container {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+}
+
+.title {
+  margin: 0 auto;
+  color: white;
+  text-align: center;
+  margin-top: 2rem;
+}
