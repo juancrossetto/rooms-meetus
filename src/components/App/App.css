@@ -1,5 +1,5 @@
 .app {
-  background-color: #4a4a4a;
+  background-color: transparent;
   position: absolute;
   height: 100%;
   width: 100%;
@@ -19,4 +19,7 @@
   color: white;
   text-align: center;
   margin-top: 2rem;
+  text-shadow: 1px 0 8px #171923; /* horizontal-offset vertical-offset 'blur' colour */
+  -moz-text-shadow: 1px 0 8px #171923;
+  -webkit-text-shadow: 1px 0 8px #171923;
 }
