@@ -131,14 +131,14 @@ function getMessage(callState) {
     header = `Fatal error: ${callState.fatalError}`;
     isError = true;
   } else if (callState.camOrMicError) {
-    header = `Camera or mic access error: ${callState.camOrMicError}`;
+    header = `Error al habilitar camara o microfono: ${callState.camOrMicError}`;
     detail =
-      'See https://help.daily.co/en/articles/2528184-unblock-camera-mic-access-on-a-computer to troubleshoot.';
+      'Ver https://help.daily.co/en/articles/2528184-unblock-camera-mic-access-on-a-computer para mas información.';
     isError = true;
   } else if (shouldShowClickAllow()) {
-    header = 'Click "Allow" to enable camera and mic access';
+    header = 'Click "Allow" para habilitar la camara y el microfono';
   } else if (Object.keys(callState.callItems).length === 1) {
-    header = "Copy and share this page's URL to invite others";
+    header = 'Compartí esta URL para invitar a otros';
     detail = window.location.href;
   }
   return header || detail ? { header, detail, isError } : null;
