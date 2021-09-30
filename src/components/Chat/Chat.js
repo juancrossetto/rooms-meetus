@@ -16,7 +16,7 @@ export default function Chat(props) {
     callObject.sendAppMessage({ message: inputValue }, '*');
     const name = callObject.participants().local.user_name
       ? callObject.participants().local.user_name
-      : 'Guest';
+      : 'Invitado/a';
     setChatHistory([
       ...chatHistory,
       {
@@ -40,7 +40,7 @@ export default function Chat(props) {
       const participants = callObject.participants();
       const name = participants[event.fromId].user_name
         ? participants[event.fromId].user_name
-        : 'Guest';
+        : 'Invitado/a';
       setChatHistory([
         ...chatHistory,
         {
@@ -57,6 +57,7 @@ export default function Chat(props) {
     return function cleanup() {
       callObject.off('app-message', handleAppMessage);
     };
+    // eslint-disable-next-line
   }, [callObject, chatHistory]);
 
   useEffect(() => {}, [chatHistory]);

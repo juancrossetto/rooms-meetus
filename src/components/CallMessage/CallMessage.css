@@ -5,10 +5,11 @@
   left: 50%;
   position: absolute;
   transform: translate(-50%, -50%);
-  color: #ffffff;
+  /* color: #ffffff; */
   text-align: center;
   font-size: 14px;
   line-height: 17px;
+  color: 'gray';
 }
 
 .call-message.error {

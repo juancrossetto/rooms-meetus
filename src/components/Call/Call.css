@@ -5,7 +5,8 @@
 
 .large-tiles {
   height: calc(100% - 132.5px);
-  width: 80%;
+  /* width: 80%; */
+  width: 100%;
   position: relative;
   left: 50%;
   transform: translate(-50%, 0);

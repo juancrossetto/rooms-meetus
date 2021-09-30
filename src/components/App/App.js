@@ -1,4 +1,14 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { ChakraProvider } from '@chakra-ui/react';
+import {
+  Box,
+  Flex,
+  Stack,
+  Heading,
+  Text,
+  Container,
+  HStack,
+} from '@chakra-ui/react';
 import Call from '../Call/Call';
 import StartButton from '../StartButton/StartButton';
 import api from '../../api';
@@ -205,40 +215,154 @@ export default function App() {
    */
   const enableStartButton = appState === STATE_IDLE;
 
-  const roomsID = [
-    'BH83rOEQmfGoV3hPdazN',
-    'WcQW4eHbRKJf9PsyAH1c',
-    'rrlXOpH1KlwNLO6GtBVp',
+  const rooms = [
+    {
+      id: '200467',
+      code: 'WcQW4eHbRKJf9PsyAH1c',
+      name: 'Interes general',
+      online: 2,
+      description:
+        'Una sala para poder charlar y divertirse hablando de cualquier tema',
+    },
+    {
+      id: '200468',
+      code: 'WcQW4eHbRKJf9PsyAH1c',
+      name: 'Viajes',
+      online: 3,
+      description:
+        'Una sala para poder conocer de experiencias de viajes, lugares y mucho mas.',
+    },
+    {
+      id: '200469',
+      code: 'rrlXOpH1KlwNLO6GtBVp',
+      name: 'Tecnología',
+      online: 4,
+      description:
+        'Una sala para poder debatir sobre los últimos avances en la informática.',
+    },
   ];
+
   return (
-    <div className="app">
-      <h1 className="title">MeetUs Rooms</h1>
-      {showCall ? (
-        // NOTE: for an app this size, it's not obvious that using a Context
-        // is the best choice. But for larger apps with deeply-nested components
-        // that want to access call object state and bind event listeners to the
-        // call object, this can be a helpful pattern.
-        <CallObjectContext.Provider value={callObject}>
-          <Call roomUrl={roomUrl} />
-          <Tray
-            disabled={!enableCallButtons}
-            onClickLeaveCall={startLeavingCall}
-          />
-        </CallObjectContext.Provider>
-      ) : (
-        <div className="button-container">
-          {roomsID.map((roomID, index) => (
-            <StartButton
-              key={index}
-              disabled={!enableStartButton}
-              onClick={() => {
-                createCall(roomID).then((url) => startJoiningCall(url));
-              }}
-              number={index + 1}
-            />
-          ))}
-        </div>
-      )}
-    </div>
+    <ChakraProvider>
+      <Box>
+        <Container
+          maxW="8xl"
+          padding={0}
+          h={'100vh'}
+          // display="flex"
+          // justifyContent="center"
+          // alignItems="center"
+        >
+          {/* <h1 className="title">MeetUs Rooms</h1> */}
+          {showCall ? (
+            // NOTE: for an app this size, it's not obvious that using a Context
+            // is the best choice. But for larger apps with deeply-nested components
+            // that want to access call object state and bind event listeners to the
+            // call object, this can be a helpful pattern.
+            <CallObjectContext.Provider value={callObject}>
+              <Call roomUrl={roomUrl} />
+              <Tray
+                disabled={!enableCallButtons}
+                onClickLeaveCall={startLeavingCall}
+              />
+            </CallObjectContext.Provider>
+          ) : (
+            <>
+              {/* <Container maxW="6xl"> */}
+              <Flex
+                display="flex"
+                flexDirection={'row'}
+                justifyContent="center"
+                alignItems="center"
+                flexWrap="wrap"
+                h={'100vh'}
+              >
+                {rooms.map((room) => (
+                  <Box
+                    key={room.id}
+                    border="2px solid #5985eb"
+                    w="20rem"
+                    mx={4}
+                    mt={4}
+                    height="23rem"
+                    position="relative"
+                    borderRadius={8}
+                  >
+                    <Stack
+                      id="header"
+                      justifyContent="flex-start"
+                      border="2px solid transparent"
+                      borderBottomColor="#5985eb"
+                      p={3}
+                    >
+                      <Text>
+                        Id Sala: <strong>{room.id}</strong>
+                      </Text>
+                      <Heading color="#5985eb">{room.name}</Heading>
+                    </Stack>
+                    <Stack id="footer" p={3}>
+                      <Text>Descripción</Text>
+                      <Text fontSize="14px">{room.description}</Text>
+                      <HStack
+                        justifyContent="flex-start"
+                        alignItems="center"
+                        mt={'30px!important'}
+                      >
+                        <Box
+                          w={4}
+                          h={4}
+                          bg={'green.300'}
+                          border="2px solid white"
+                          rounded="full"
+                          left="0"
+                        />
+                        <Text
+                          pos={'relative'}
+                          fontSize="14px"
+                          ml="10px!important"
+                        >
+                          {room.online} en línea
+                        </Text>
+                      </HStack>
+
+                      <Box
+                        position="absolute"
+                        bottom="10px"
+                        width="92%"
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                      >
+                        <StartButton
+                          disabled={!enableStartButton}
+                          onClick={() => {
+                            createCall(room.code).then((url) =>
+                              startJoiningCall(url)
+                            );
+                          }}
+                        />
+                      </Box>
+                    </Stack>
+                  </Box>
+                ))}
+              </Flex>
+              {/* </Container> */}
+              {/* <div className="button-container">
+              {roomsID.map((roomID, index) => (
+                <StartButton
+                  key={index}
+                  disabled={!enableStartButton}
+                  onClick={() => {
+                    createCall(roomID).then((url) => startJoiningCall(url));
+                  }}
+                  number={index + 1}
+                />
+              ))}
+            </div> */}
+            </>
+          )}
+        </Container>
+      </Box>
+    </ChakraProvider>
   );
 }
