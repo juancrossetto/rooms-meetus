@@ -244,7 +244,7 @@ export default function App() {
 
   return (
     <ChakraProvider>
-      <Box>
+      <Box bg="transparent">
         <Container
           maxW="8xl"
           padding={0}
